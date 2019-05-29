@@ -12,18 +12,23 @@ module.exports = function(config) {
     exclude: [
     ],
     preprocessors: {
-      'src/*.js': ['webpack', 'sourcemap'],
+      'src/*.js': ['webpack', 'sourcemap', 'coverage'],
       'spec/*spec.js': ['webpack', 'sourcemap']
     },
     plugins: [
       'karma-sourcemap-loader',
+      'karma-coverage',
       'karma-jquery',
       'karma-webpack',
       'karma-jasmine',
       'karma-chrome-launcher',
       'karma-jasmine-html-reporter'
     ],
-    reporters: ['progress', 'kjhtml'],
+    reporters: ['progress', 'kjhtml', 'coverage'],
+    coverageReporter: {
+      type : 'html',
+      dir : 'coverage/'
+    },
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,

@@ -1,1 +1,0 @@
-{"uuid":"dfa2fdd9-a829-455c-90a4-0554f53fcd05","parent":null,"pid":12111,"argv":["/usr/local/bin/node","/usr/local/bin/npm","run","test"],"execArgv":[],"cwd":"/Users/duherb/Desktop/testRig","time":1559106061178,"root":"b4fb7329-e4ca-4c3b-9f7b-935fcffba21a","coverageFilename":"/Users/duherb/Desktop/testRig/.nyc_output/dfa2fdd9-a829-455c-90a4-0554f53fcd05.json","files":[]}

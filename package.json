@@ -1,13 +1,13 @@
 {
-  "name": "testRig",
+  "name": "testrig",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "build": "webpack --mode development",
-    "start": "npm run build; webpack-dev-server --open --mode development",
+    "start": "npm run build; webpack-dev-server --open --mode development --display-error-details",
     "lint": "eslint src/*.js",
-    "test": "./node_modules/karma/bin/karma start karma.conf.js",
-    "coverage": "nyc npm run test"
+    "test": "karma start karma.conf.js",
+    "coverage": "nyc npm run test; exit 0"
   },
   "keywords": [],
   "author": "",
