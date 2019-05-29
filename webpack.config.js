@@ -16,7 +16,6 @@ module.exports = {
   },
   plugins: [
     new UglifyJsPlugin({sourceMap: true}),
-    new UglifyJsPlugin(),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Test Rig',
@@ -33,11 +32,11 @@ module.exports = {
           'css-loader'
         ]
       },
-      {
-        test: /\.js$/,
-        exclude: [/node_modules/, /spec.js/],
-        loader: "eslint-loader"
-      },
+      // {
+      //   test: /\.js$/,
+      //   exclude: [/node_modules/, /spec.js/],
+      //   loader: "eslint-loader"
+      // },
       {
         test: /\.js$/,
         exclude: [
