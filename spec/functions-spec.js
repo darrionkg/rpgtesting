@@ -69,15 +69,69 @@ describe('Combat', function () {
 
   it('combat turn', function () {
     let combat = new Combat([knight, enemy1, enemy2]);
-    console.log(combat.turnOrder);
-    // expect(combat.combattants[0].name).toEqual("Sir Knight");
-    // expect(combat.combattants[1].name).toEqual("Creature1");
-    // expect(combat.combattants[2].name).toEqual("Creature2");
-    // expect(combat.getNextTurn()).toEqual("Creature2");
-    // combat.advanceTurn();
-    // expect(combat.getNextTurn()).toEqual("Sir Knight");
-    // combat.advanceTurn();
-    // expect(combat.getNextTurn()).toEqual("Creature1");
+    expect(combat.turnOrder[0].name).toEqual("Creature2");
+    expect(combat.turnOrder[1].name).toEqual("Sir Knight");
+    expect(combat.turnOrder[2].name).toEqual("Creature1");
+    expect(combat.getCurrentTurn().name).toEqual("Creature2");
+    combat.advanceTurn();
+    expect(combat.getCurrentTurn().name).toEqual("Sir Knight");
+    combat.advanceTurn();
+    expect(combat.getCurrentTurn().name).toEqual("Creature1");
   });
 
+  it('combat attack', function () {
+    let combat = new Combat([knight, enemy1, enemy2]);
+    let enemyHpBefore = knight.healthCurrent; 
+    combat.Attack("Sir Knight");
+    let enemyHpAfter = knight.healthCurrent;
+    expect(enemyHpAfter).toEqual(enemyHpBefore - enemy2.getAttackStrength());
+  });
+
+  it('you got knocked da fk out', function() {
+    let combat = new Combat([knight, enemy1, enemy2]);
+    combat.Attack("Sir Knight");
+    combat.Attack("Sir Knight");
+    combat.Attack("Sir Knight");
+    expect(knight.status).toEqual("Unconscious");
+  });
+
+  it('killed sir knight', function() {
+    let combat = new Combat([knight, enemy1, enemy2]);
+    combat.Attack("Sir Knight");
+    combat.Attack("Sir Knight");
+    combat.Attack("Sir Knight");
+    combat.Attack("Sir Knight");
+    expect(knight.status).toEqual("Dead");
+  });
+
+  it('skipped dead sir knight', function() {
+    let combat = new Combat([knight, enemy1, enemy2]);
+    combat.Attack("Sir Knight");
+    combat.Attack("Sir Knight");
+    combat.Attack("Sir Knight");
+    combat.Attack("Sir Knight");
+    combat.advanceTurn();
+    expect(combat.getCurrentTurn().name).toEqual("Creature1");
+  });
+
+  it('will give xp after a kill', function() {
+    let combat = new Combat([knight, enemy1, enemy2]);
+    combat.Attack("Sir Knight");
+    combat.Attack("Sir Knight");
+    combat.Attack("Sir Knight");
+    combat.Attack("Sir Knight");
+    enemy1.giveXp(3);
+    expect(enemy1.xp).toEqual(3);
+  });
+
+  it('will level up', function() {
+    let combat = new Combat([knight, enemy1, enemy2]);
+    combat.Attack("Sir Knight");
+    combat.Attack("Sir Knight");
+    combat.Attack("Sir Knight");
+    combat.Attack("Sir Knight");
+    enemy1.giveXp(10);
+    expect(enemy1.level).toEqual(2);
+  });
+  // get xp amount = 1/4 of same level enemy
 });
